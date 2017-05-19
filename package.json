@@ -1,0 +1,49 @@
+{
+  "name": "winston-rsyslog-logstash",
+  "version": "0.0.1",
+  "description": "A Rsyslog transport for winston",
+  "main": "./lib/winston-rsyslog-logstash",
+  "homepage": "https://github.com/DNAlchemist/winston-rsyslog-logstash",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha test/*_test.js",
+    "release-patch": "npm version patch -m 'chore(*): patch version'",
+    "release-minor": "npm version minor -m 'chore(*): minor version'",
+    "release-major": "npm version major -m 'chore(*): major version'"
+  },
+  "engines": {
+    "node": ">=0.8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DNAlchemist/winston-rsyslog-logstash"
+  },
+  "peerDependencies": {
+    "winston": ">=0.7.3"
+  },
+  "devDependencies": {
+    "chai": ">=2.3.0",
+    "mocha": ">=2.2.4",
+    "timekeeper": ">=0.0.5",
+    "winston": ">=0.7.3"
+  },
+  "keywords": [
+    "logging",
+    "sysadmin",
+    "tools"
+  ],
+  "bugs": {
+    "url": "https://github.com/DNAlchemist/winston-rsyslog-logstash/issues"
+  },
+  "author": "Mikhalev Ruslan",
+  "license": "MIT",
+  "contributors": [
+    "Mikhalev Ruslan"
+  ],
+  "maintainers": [
+    "Mikhalev Ruslan"
+  ],
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
+}
