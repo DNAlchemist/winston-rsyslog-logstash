@@ -8,7 +8,8 @@
     "test": "node_modules/mocha/bin/mocha test/*_test.js",
     "release-patch": "npm version patch -m 'chore(*): patch version'",
     "release-minor": "npm version minor -m 'chore(*): minor version'",
-    "release-major": "npm version major -m 'chore(*): major version'"
+    "release-major": "npm version major -m 'chore(*): major version'",
+    "postversion": "git push origin master && git push --tags && npm publish"
   },
   "engines": {
     "node": ">=0.8.x"
