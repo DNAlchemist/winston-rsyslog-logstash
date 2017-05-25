@@ -14,15 +14,15 @@ chai.config.includeStack = true;
 require('../lib/winston-rsyslog-logstash');
 
 describe('winston-rsyslog-logstash transport', function () {
-    const port = 28777;
+    var port = 28777;
     function mergeObject(source, target) {
-        const result = {};
+        var result = {};
 
-        for (const attrName in source) {
+        for (var attrName in source) {
             result[attrName] = source[attrName];
         }
 
-        for (const attrName in target) {
+        for (var attrName in target) {
             result[attrName] = target[attrName];
         }
 
@@ -30,7 +30,7 @@ describe('winston-rsyslog-logstash transport', function () {
     }
 
     function createTestServer(port, on_data) {
-        const server = net.createServer(function (socket) {
+        var server = net.createServer(function (socket) {
             socket.on('end', function () {
             });
             socket.on('data', on_data);
@@ -67,11 +67,11 @@ describe('winston-rsyslog-logstash transport', function () {
         });
 
         it('send logs over TCP as valid message', function (done) {
-            const expected = /<134>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"INFO","stream":"sample"}\n/;
+            var expected = /<134>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"INFO","stream":"sample"}\n/;
             logger = createLogger(port);
 
             test_server = createTestServer(port, function (data) {
-                const response = data.toString();
+                var response = data.toString();
                 expect(response).to.be.matches(expected);
                 done();
             });
@@ -81,11 +81,11 @@ describe('winston-rsyslog-logstash transport', function () {
 
         it('send with different log levels', function (done) {
 
-            const expected = /<134>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"INFO","stream":"sample"}\n<131>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"ERROR","stream":"sample"}\n/;
+            var expected = /<134>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"INFO","stream":"sample"}\n<131>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"ERROR","stream":"sample"}\n/;
             logger = createLogger(port);
 
             test_server = createTestServer(port, function (data) {
-                const response = data.toString();
+                var response = data.toString();
                 expect(response).to.be.matches(expected);
                 done();
             });
@@ -98,8 +98,8 @@ describe('winston-rsyslog-logstash transport', function () {
         it('send with overrided meta data', function(done) {
             logger = createLogger(port, false, '', { meta: { stream: 'sample' } });
             test_server = createTestServer(port, function (data) {
-                const response = data.toString();
-                const expected = /<134>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"INFO","stream":"sample"}\n/;
+                var response = data.toString();
+                var expected = /<134>[\S]* localhost apps {"@timestamp":"[^"]*","@version":1,"message":"hello world","pid":\d*,"level":"INFO","stream":"sample"}\n/;
 
                 expect(response).to.be.matches(expected);
                 done();
@@ -128,7 +128,7 @@ describe('winston-rsyslog-logstash transport', function () {
     describe('without rsyslog server', function () {
 
         it('fallback to silent mode if rsyslog server is down', function (done) {
-            const logger = createLogger(28747);
+            var logger = createLogger(28747);
 
             logger.transports.rsyslog.on('error', function (err) {
                 expect(logger.transports.rsyslog.silent).to.be.true;
@@ -139,7 +139,7 @@ describe('winston-rsyslog-logstash transport', function () {
         });
 
         it('emit an error message when it fallback to silent mode', function (done) {
-            const logger = createLogger(28747);
+            var logger = createLogger(28747);
             var called = true;
 
             logger.transports.rsyslog.on('error', function (err) {
@@ -155,7 +155,7 @@ describe('winston-rsyslog-logstash transport', function () {
                 }
             });
             // Wait for timeout for logger before sending first message
-            const interval = setInterval(function () {
+            var interval = setInterval(function () {
                 logger.log('info', 'hello world', {stream: 'sample'});
                 clearInterval(interval);
             }, 400);
