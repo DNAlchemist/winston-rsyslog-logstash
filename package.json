@@ -1,6 +1,6 @@
 {
   "name": "winston-rsyslog-logstash",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Rsyslog transport for winston",
   "main": "./lib/winston-rsyslog-logstash",
   "homepage": "https://github.com/DNAlchemist/winston-rsyslog-logstash",
